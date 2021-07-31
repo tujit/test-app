@@ -21,18 +21,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      # - name: Docker meta
-      #   id: meta
-      #   uses: docker/metadata-action@v3
-      #   with:
-      #     # list of Docker images to use as base name for tags
-      #     images: |
-      #       tujit/test-app
-      #     # generate Docker tags based on the following events/attributes
-      #     tags: |
-      #       type=ref,event=branch
-      #       type=ref,event=pr
-      #       type=sha
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          # list of Docker images to use as base name for tags
+          images: |
+            tujit/test-app
+          # generate Docker tags based on the following events/attributes
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha
 
       - name: Login to github registry
         uses: docker/login-action@v1
@@ -48,4 +48,4 @@ jobs:
           context: .
           pull: true
           push: true
-          # tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }}
